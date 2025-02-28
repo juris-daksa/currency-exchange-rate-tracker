@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export const ExchangeRatesContext = createContext();
+export const ExchangeRatesContext = createContext(null);
 
 export const ExchangeRatesProvider = ({ children }) => {
   const [exchangeRates, setExchangeRates] = useState({});
