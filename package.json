@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/juris-daksa/currency-exchange-rate-tracker#readme",
   "dependencies": {
+    "axios": "^1.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
