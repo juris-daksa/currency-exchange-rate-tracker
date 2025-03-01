@@ -22,29 +22,41 @@ const saveExchangeRates = async (date, rates) => {
     `;
     await pool.query(query, [date, rates.USD, rates.GBP, rates.AUD]);
     console.log(`Exchange rates saved for ${date}`);
-  } catch (err) {
-    console.error("Error saving exchange rates:", err);
+  } catch (error) {
+    console.error("Error saving exchange rates:", error);
   }
 };
 
-// mock API req
-const fetchExchangeRates = async () => {
-  const today = new Date().toISOString().split("T")[0];
-  const mockRates = { GBP: 0.85, USD: 1.08, AUD: 1.66 };
-  await saveExchangeRates(today, mockRates);
+const fetchAndSaveExchangeRates = async () => {
+  try {
+    const API_URL = `https://anyapi.io/api/v1/exchange/rates?base=EUR&apiKey=${process.env.ANYAPI_KEY}`;
+    const response = await axios.get(API_URL);
+    const { rates } = response.data;
+
+    if (!rates?.USD || !rates?.GBP || !rates?.AUD) {
+      throw new Error("Missing required currency rates in API response.");
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    await saveExchangeRates(today, rates);
+  } catch (error) {
+    console.error("Failed to fetch and save exchange rates:", error);
+  }
 };
 
 app.get("/api/exchange-rates", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM exchange_rates ORDER BY date DESC");
     res.json(result.rows);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error("Database error:", error);
     res.status(500).json({ error: "Database error" });
   }
 });
 
-fetchExchangeRates(); // get fresh data when app is started
+(async () => {
+  await fetchAndSaveExchangeRates(); // get fresh data when app is started
+})();
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
