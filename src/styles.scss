@@ -1,6 +1,89 @@
-$primary-color: #0ad175;
-
 body {
-  background-color: $primary-color;
   font-family: Arial, sans-serif;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.table-title {
+  position: relative;
+  display: inline-block;
+  .currency {
+    cursor: pointer;
+  }
+}
+
+.table-container {
+  width: 60%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.table-wrapper {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #232323;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    cursor: pointer;
+    background:#ccc;
+  }
+}
+
+.currency-list {
+  position: absolute;
+  background: white;
+  border: 1px solid #232323;
+  padding: 0px;
+  list-style: none;
+  margin: 0;
+  margin-left: 100px;
+  //z-index: 10;
+  //width: 100px;
+
+  li {
+    padding: 3px 12px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: #ccc;
+    }
+  }
+}
+
+.last-updated {
+  font-size: smaller;
+}
+
+.exchange-rate-summary {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+
+  button {
+    margin: 0 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .page-item {
+    &.active {
+      font-weight: bold;
+    }
+  }
 }

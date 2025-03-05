@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.scss";
 import ExchangeRatesTable from "./components/ExchangeRatesTable";
 import { useExchangeRateContext } from "./context/ExchangeRatesProvider";
 
