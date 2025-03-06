@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const pool = require("./db");
+const cron = require("node-cron");
 
 const app = express();
 const PORT = process.env.API_PORT || 5000;
@@ -55,9 +56,13 @@ app.get("/api/exchange-rates", async (req, res) => {
 });
 
 (async () => {
-  await fetchAndSaveExchangeRates(); // get fresh data when app is started
+  await fetchAndSaveExchangeRates();
 })();
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+cron.schedule("1 0 * * *", async () => {
+    await fetchAndSaveExchangeRates();
 });
