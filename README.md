@@ -31,19 +31,19 @@ This application fetches and displays daily exchange rates for EUR to various cu
    npm install
    ```
 3. Set up environment variables in a `.env` file:
-   ```sh
-  DB_USER=user
-  DB_HOST=localhost
-  DB_NAME=exchange_rates_db
-  DB_PASSWORD=password
-  DB_PORT=5432
+   ```plaintext
+   DB_USER=user
+   DB_HOST=localhost
+   DB_NAME=exchange_rates_db
+   DB_PASSWORD=password
+   DB_PORT=5432
 
-  ANYAPI_KEY=your-api-key
+   ANYAPI_KEY=your-api-key
 
-  API_PORT=5000
+   API_PORT=5000
    ```
 
-5. Start the backend:
+4. Start the backend:
    ```sh
    npm start
    ```
